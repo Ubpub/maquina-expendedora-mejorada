@@ -94,8 +94,8 @@ public class MaquinaExpendedoraMejorada {
         }
         else {
             totalDineroExtraido = totalDineroAcumulado;
+            totalDineroAcumulado = 0;
         }
-        totalDineroAcumulado = 0;
         return totalDineroExtraido;
     }
 }
