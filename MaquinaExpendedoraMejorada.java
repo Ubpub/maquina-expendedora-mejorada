@@ -14,13 +14,15 @@ public class MaquinaExpendedoraMejorada {
     private int numeroDeBilletesVendidos;
     //Elegir entre máquina con o sin premio
     private boolean maquinaExpendedoraConPremio;
+    //Elegir el número másximo de billetes
+    private int numeroMaximoDeBilletes;
 
     /**
      * Crea una maquina expendedora de billetes de tren con el 
      * precio del billete y el origen y destino dados. Se asume que el precio
      * del billete que se recibe es mayor que 0.
      */
-    public MaquinaExpendedoraMejorada(int precioDelBillete, String origen, String destino, boolean conPremio) {
+    public MaquinaExpendedoraMejorada(int precioDelBillete, String origen, String destino, boolean conPremio, int maximoBilletes) {
         precioBillete = precioDelBillete;
         balanceClienteActual = 0;
         totalDineroAcumulado = 0;
@@ -28,6 +30,7 @@ public class MaquinaExpendedoraMejorada {
         estacionDestino = destino;
         numeroDeBilletesVendidos = 0;
         maquinaExpendedoraConPremio = conPremio;
+        numeroMaximoDeBilletes = maximoBilletes;
     }
 
     /**
@@ -62,33 +65,39 @@ public class MaquinaExpendedoraMejorada {
     public void imprimirBillete() {
         int cantidadDeDineroQueFalta;
         cantidadDeDineroQueFalta = precioBillete - balanceClienteActual;
-        if (cantidadDeDineroQueFalta <= 0) {        
-            // Simula la impresion de un billete
-            System.out.println("##################");
-            System.out.println("# Billete de tren:");
-            System.out.println("# De " + estacionOrigen + " a " + estacionDestino);
-            System.out.println("# " + precioBillete + " euros.");
-            System.out.println("##################");
-            System.out.println();         
+        if (numeroDeBilletesVendidos < numeroMaximoDeBilletes) {
+            if (cantidadDeDineroQueFalta <= 0) {        
+                // Simula la impresion de un billete
+                System.out.println("##################");
+                System.out.println("# Billete de tren:");
+                System.out.println("# De " + estacionOrigen + " a " + estacionDestino);
+                System.out.println("# " + precioBillete + " euros.");
+                System.out.println("##################");
+                System.out.println();         
     
-            // Actualiza el total de dinero acumulado en la maquina
-            totalDineroAcumulado = totalDineroAcumulado + precioBillete;
-            // Reduce el balance del cliente actual dejandole seguir utilizando la maquina
-            balanceClienteActual = balanceClienteActual - precioBillete;
-            //Añade uno al número de billetes vendidos
-            numeroDeBilletesVendidos += 1;
+                // Actualiza el total de dinero acumulado en la maquina
+                totalDineroAcumulado = totalDineroAcumulado + precioBillete;
+                // Reduce el balance del cliente actual dejandole seguir utilizando la maquina
+                balanceClienteActual = balanceClienteActual - precioBillete;
+                //Añade uno al número de billetes vendidos
+                numeroDeBilletesVendidos += 1;
             
-            if (maquinaExpendedoraConPremio == true) {
-                System.out.println("Tienes un descuendo de " + precioBillete*10/100F + " euros");
+                if (maquinaExpendedoraConPremio == true) {
+                    System.out.println("Tienes un descuendo de " + precioBillete*10/100F + " euros");
+                    System.out.println();
+                }
+                else {
+                    System.out.println();
+                }
             }
             else {
+                System.out.println("Necesitas introducir " + (cantidadDeDineroQueFalta) + " euros mas!");
                 System.out.println();
             }
         }
         else {
-            System.out.println("Necesitas introducir " + (cantidadDeDineroQueFalta) + " euros mas!");
-                    
-        }            
+            System.out.println("Se ha alcanzado el número máximo de billetes vendidos!");
+        }
     }
     
     public int getNumeroBilletesVendidos() {
