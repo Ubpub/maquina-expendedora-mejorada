@@ -79,7 +79,7 @@ public class MaquinaExpendedoraMejorada {
             numeroDeBilletesVendidos += 1;
             
             if (maquinaExpendedoraConPremio == true) {
-                System.out.println("Tienes un descuendo de " + precioBillete*10/100 + " euros");
+                System.out.println("Tienes un descuendo de " + precioBillete*10/100F + " euros");
             }
             else {
                 System.out.println();
