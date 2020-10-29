@@ -60,7 +60,7 @@ public class MaquinaExpendedoraMejorada {
             }  
         }
         else {
-            System.out.println("No se puede introducir más dinero");
+            System.out.println("No se puede introducir más dinero porque el máximo de billetes se ha alcanzado");
         }
     }
 
@@ -88,8 +88,13 @@ public class MaquinaExpendedoraMejorada {
                 numeroDeBilletesVendidos += 1;
             
                 if (maquinaExpendedoraConPremio == true) {
-                    System.out.println("Tienes un descuendo de " + precioBillete*10/100F + " euros");
-                    System.out.println();
+                    if (numeroDeBilletesVendidos%3 == 0) {
+                        System.out.println("Tienes un descuendo de " + precioBillete*10/100F + " euros");
+                        System.out.println();
+                    }
+                    else {
+                        System.out.println();
+                    }
                 }
                 else {
                     System.out.println();
